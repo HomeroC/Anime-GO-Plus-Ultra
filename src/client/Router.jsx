@@ -4,6 +4,7 @@ import App from './App'
 import HomeScreen from './Screens/HomeScreen'
 import Watchlist from './Screens/Watchlist'
 import Auth from './Screens/Auth'
+import Details from './Screens/Details'
 
 function Router() {
   const router = createBrowserRouter([
@@ -23,8 +24,13 @@ function Router() {
         {
           path: 'login',
           element: <Auth />
+        },
+        {
+          path: 'details/:id',
+          element: <Details />
         }
       ],
+      
     }
    
   ])
