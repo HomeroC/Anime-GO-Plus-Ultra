@@ -30,23 +30,24 @@ button {
   margin: 0 10px;
   width: 200px;
   padding: 10px 0;
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+  box-shadow: 0 0 10px #F57621;
   transition: 0.4s;
 }
 
 .sign-up {
 color: white;
-  background-color: #6855E0;
+  background-color: #F57621;
 }
 
 .login {
 color: rgb(104, 85, 224);
-  background-color: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(104, 85, 224, 1);
+  background-color: #F57621;
+  border: 1px solid #F57621;
 }
 
 button:hover {
   color: white;
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
-  background-color: rgba(104, 85, 224, 1);
+  box-shadow: 0 0 20px #F57621;
+  background-color: #F57621;
 }
+

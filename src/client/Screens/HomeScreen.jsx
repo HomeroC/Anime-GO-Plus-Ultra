@@ -21,20 +21,34 @@ function HomeScreen() {
     getAnime();
   }, [page]);
 
+  const titleString = (anime) => {
+    let title = anime.title
+    if (title.length > 15) {
+      title = title.substring(0, 15) + "...";
+    }
+    return <h2 className="text-white p-2">{title}</h2>
+  }
+
   return (
-    <div className="p-4 bg-[#250458] h-full">
+    <div className="p-4 bg-[#23252B] h-full">
       <h1 className="text-white">Home Screen</h1>
-      <main className="flex flex-row flex-wrap gap-8 justify-center p-4">
+      <main className="flex flex-row flex-wrap gap-5 justify-center p-2">
         {display.map((anime) => {
           return (
-            <div className="box-border" key={anime.rank}>
-              <h2 className="text-white">{anime.title}</h2>
+            <div
+              className="flex flex-col items-center justify-center  p-4"
+              key={anime.rank}
+            >
               <img
-                className="animeCard"
+                className="rounded-md max-h-80"
                 src={anime.images.jpg.image_url}
                 alt={anime.title}
               />
-              <button onClick={() => setWatchlist([...watchlist, anime])}>
+              {titleString(anime)}
+              <button
+                className=""
+                onClick={() => setWatchlist([...watchlist, anime])}
+              >
                 Add to Watchlist
               </button>
             </div>
