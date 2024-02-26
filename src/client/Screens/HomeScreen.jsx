@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Outlet, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 function HomeScreen() {
   const [watchlist, setWatchlist] = useState([]);
@@ -8,10 +8,17 @@ function HomeScreen() {
   const [page, setPage] = useState(1);
   
 
-  const getAnime = () => {
-    axios.get(`/allAnime`).then((res) => {
-      setDisplay(res.data);
-    });
+  const getAnime = async() => {
+    try {
+     await axios
+        .get(`/allAnime`)
+        .then((res) => {
+        setDisplay(res.data);
+      });
+    } catch (error) {
+      console.error("Error fetching Data:", error);
+      throw error;
+     }
   };
 
   useEffect(() => {

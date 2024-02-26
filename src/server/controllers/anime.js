@@ -8,3 +8,11 @@ export const getAllAnime = (request, response) => {
             response.send(res.data.data)
         })
 } 
+
+export const getDetails = (request, response) => {
+    const { id } = request.params
+    axios.get(`${baseUrl}/anime/${id}`)
+        .then((res) => {
+            response.send(res.data.data)
+        })
+}
