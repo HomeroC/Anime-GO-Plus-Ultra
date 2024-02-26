@@ -1,0 +1,24 @@
+.banner {
+  width: 100%;
+  overflow: hidden;
+}
+
+.banner-list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  animation: scrollBanner 5s linear infinite; /* Adjust animation duration and timing function as needed */
+}
+
+.banner-list li {
+  margin-right: 30px; /* Adjust spacing between titles */
+}
+
+@keyframes scrollBanner {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
