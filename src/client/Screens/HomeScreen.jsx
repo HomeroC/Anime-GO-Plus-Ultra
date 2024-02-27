@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from
+  "react-router-dom";
 
 function HomeScreen() {
   const [watchlist, setWatchlist] = useState([]);
   const [display, setDisplay] = useState([]);
   const [page, setPage] = useState(1);
-  
-
+  const { search } = useOutletContext()
+console.log(search)
   const getAnime = async() => {
     try {
      await axios
@@ -35,13 +36,13 @@ function HomeScreen() {
 
   const navigate = useNavigate()
 
-  
+  let list = search.length > 0 ? search : display;
 
   return (
     <div className="p-4 bg-[#23252B] h-full">
-      <h1 className="text-white">Home Screen</h1>
-      <main className="flex flex-row flex-wrap gap-5 justify-center p-2">
-        {display.map((anime) => {
+      <h1 className="text-white"></h1>
+      <main className="flex flex-row flex-wrap gap-5 justify-center pt-14 p-2">
+        {list.map((anime) => {
           const handleNavigate = () => {
             navigate(`/details/${anime.mal_id}`);
           };

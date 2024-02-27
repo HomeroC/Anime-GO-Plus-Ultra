@@ -27,8 +27,8 @@ function Details({}) {
   }, [id]);
 
   return (
-    <div className="p-4 bg-[#23252B] h-full">
-      <h1 className="text-3xl text-white pt-20">Details</h1>
+    <div className="p-4 bg-[#23252B] h-screen">
+      <h1 className="text-3xl text-white pt-20"></h1>
       {anime && (
         <div className="flex flex-col items-center justify-center p-4">
           <img
@@ -40,6 +40,9 @@ function Details({}) {
           <p className="text-white p-2">{anime.synopsis}</p>
         </div>
       )}
+      <div>
+        
+      </div>
        
     </div>
   );
