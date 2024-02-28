@@ -37,12 +37,14 @@ button {
 .sign-up {
 color: white;
   background-color: #F57621;
+  width: 10rem;
 }
 
 .login {
-color: rgb(104, 85, 224);
+color: white;
   background-color: #F57621;
   border: 1px solid #F57621;
+  width: 10rem;
 }
 
 button:hover {

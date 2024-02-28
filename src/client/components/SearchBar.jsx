@@ -6,7 +6,7 @@ import axios from "axios";
 
 const SearchBar = ({setSearch}) => {
   const [isInputVisible, setInputVisible] = useState(false);
-  // const [search, setSearch] = useState('');
+ 
   const inputRef = useRef(null);
 
   const baseUrl = "https://api.jikan.moe/v4";

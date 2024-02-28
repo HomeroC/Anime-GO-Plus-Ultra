@@ -5,12 +5,16 @@ import {db} from "./util/db.js"
 import { User } from "./models/user.js";
 import { Watchlist } from "./models/watchlist.js";
 import { getDetails } from "./controllers/anime.js";
+import { login, signup } from "./controllers/authController.js";
 
 const app = express();
 app.use(express.json());
 
 app.get("/allAnime", getAllAnime)
 app.get("/animeDetails/:id", getDetails)
+
+app.post("/login", login)
+app.post("/signup", signup)
 
 User.hasMany(Watchlist);
 Watchlist.belongsTo(User)
