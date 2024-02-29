@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import  AuthContext  from "../state/AuthContext.jsx";
 import axios from "axios";
+
 
 function Auth() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [action, setAction] = useState("");
+  const [token, setToken] = useState("");
+  const {dispatch} = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,6 +20,7 @@ function Auth() {
       axios
         .post("/signup", body)
         .then((res) => {
+          
           console.log(res);
         })
         .catch((err) => {
@@ -26,6 +31,8 @@ function Auth() {
         .post("/login", body)
         .then((res) => {
           console.log(res);
+         localStorage.setItem("token", res.data.token);
+          dispatch({ type: "LOGIN", payload: res.data });
         })
         .catch((err) => {
           console.log(err);
@@ -36,6 +43,8 @@ function Auth() {
   return (
     <form action="" onSubmit={handleSubmit}>
       <div className="flex flex-col items-center justify-center h-screen bg-[#23252B]">
+        <h1 className="text-[#F57621]">Welcome to Anime GO "Plus Ultra"!</h1>
+        <h2 className="text-white mb-20">Please Login or Sign up to continue!</h2>
         <input
           type="text"
           placeholder="Username"
@@ -55,6 +64,7 @@ function Auth() {
           >
             Login
           </button>
+          <span className="text-white mx-4">or</span>
           <button
             className="sign-up px-4 py-2"
             onClick={() => setAction("Sign Up")}

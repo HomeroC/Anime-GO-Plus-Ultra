@@ -1,4 +1,27 @@
 import { User } from "../models/user.js";
+import jwt from "jsonwebtoken";
+import { config } from "dotenv";
+config();
+
+const { SECRET_KEY } = process.env;
+
+const createToken = (info) => {
+  return jwt.sign(info, SECRET_KEY, {
+    expiresIn: "1 hour",
+  });
+};
+
+export const checkToken = async (req, res) => {
+  try {
+    const validToken = jwt.verify(req.params.token, SECRET_KEY);
+    if (validToken) {
+      res.status(200).send("Valid token");
+    } 
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Invalid token");
+  }
+};
 
 export const signup = async (req, res) => {
   try {
@@ -35,6 +58,9 @@ export const login = async (req, res) => {
       if (validUser.password != req.body.password) {
         res.status(400).send("Invalid password");
       } else {
+        const token = createToken(req.body);
+        validUser.token = token
+        //   console.log(token)
         res.status(200).send(validUser);
       }
     }
