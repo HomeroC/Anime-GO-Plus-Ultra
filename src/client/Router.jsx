@@ -18,14 +18,15 @@ function Router() {
     {
       
       path: "login",
-      element: !state.password ? <Auth /> : <Navigate to="/" />,
+      element: !state.password ? <Auth /> : <Navigate to="/home" />,
     },
     {
       path: "/",
       element:state.password? <App /> : <Navigate to="/login" />,
       children: [
         {
-          index:true,
+          index: true,
+          path: "home",
           element: <HomeScreen />,
         },
         {

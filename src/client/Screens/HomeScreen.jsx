@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useOutletContext } from
-  "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function HomeScreen() {
   const [watchlist, setWatchlist] = useState([]);
   const [display, setDisplay] = useState([]);
   const [page, setPage] = useState(1);
-  const { search } = useOutletContext()
-console.log(search)
-  const getAnime = async() => {
+  const { search } = useOutletContext();
+ 
+
+  const getAnime = async () => {
     try {
-     await axios
-        .get(`/allAnime`)
+      await axios
+        .get(`/allAnime`, {
+          params: {
+            page: page,
+          },
+        })
         .then((res) => {
-        setDisplay(res.data);
-      });
+          setDisplay(res.data);
+        });
     } catch (error) {
       console.error("Error fetching Data:", error);
       throw error;
-     }
+    }
   };
 
   useEffect(() => {
@@ -27,14 +31,24 @@ console.log(search)
   }, [page]);
 
   const titleString = (anime) => {
-    let title = anime.title
+    let title = anime.title;
     if (title.length > 15) {
       title = title.substring(0, 15) + "...";
     }
-    return <h2 className="text-white p-2">{title}</h2>
-  }
+    return <h2 className="text-white p-2">{title}</h2>;
+  };
 
-  const navigate = useNavigate()
+  const nextPage = () => {
+    setPage(page + 1);
+    window.scrollTo({top: 0, behavior: 'smooth'})
+  };
+
+  const prevPage = () => {
+    setPage(page - 1);
+    window.scrollTo({top: 0, behavior: 'smooth'})
+  };
+
+  const navigate = useNavigate();
 
   let list = search.length > 0 ? search : display;
 
@@ -68,6 +82,10 @@ console.log(search)
           );
         })}
       </main>
+      <div className="flex justify-center mt-4 mb-4">
+        <button className="sign-up" onclisck={page !== 1 && prevPage}>Previous</button>
+        <button className="sign-up" onClick={nextPage}>Next</button>
+      </div>
     </div>
   );
 }

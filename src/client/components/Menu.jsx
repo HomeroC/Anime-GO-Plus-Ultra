@@ -1,13 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import AuthContext from "../state/AuthContext";
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { dispatch } = useContext(AuthContext);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleLogout = () => {
+    setIsOpen(!isOpen)
+    dispatch({type: "LOGOUT"})
+  }
 
   return (
     <div>
@@ -25,18 +32,18 @@ const Menu = () => {
               Home
             </Link>
             <Link
-              to="/login"
-              onClick={toggleMenu}
-              className="w-[50%] flex justify-center items-center rounded-full showdow-lg bg-gray-600 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200 text-white"
-            >
-              Login
-            </Link>
-            <Link
               to="/watchlist"
               onClick={toggleMenu}
               className="w-[50%] flex justify-center items-center rounded-full showdow-lg bg-gray-600 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200 text-white"
             >
               Watchlist
+            </Link>
+            <Link
+              to="/login"
+              onClick={handleLogout}
+              className="w-[50%] flex justify-center items-center rounded-full showdow-lg bg-red-400 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-200 text-white"
+            >
+              Logout
             </Link>
           </div>
         </div>

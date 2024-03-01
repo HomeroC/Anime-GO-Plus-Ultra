@@ -33,11 +33,13 @@ export const signup = async (req, res) => {
     if (checkUser) {
       console.log(checkUser);
       res.status(400).send("User already exists");
+      
     } else {
       console.log("Free to go");
       let newUser = await User.create(req.body);
 
       res.status(200).send(newUser);
+
     }
   } catch (error) {
     console.log(error);
