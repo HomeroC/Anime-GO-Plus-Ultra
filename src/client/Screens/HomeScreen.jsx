@@ -3,11 +3,9 @@ import axios from "axios";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 function HomeScreen() {
-  const [watchlist, setWatchlist] = useState([]);
   const [display, setDisplay] = useState([]);
   const [page, setPage] = useState(1);
-  const { search } = useOutletContext();
- 
+  const { search, watchlist, setWatchlist } = useOutletContext();
 
   const getAnime = async () => {
     try {
@@ -40,13 +38,20 @@ function HomeScreen() {
 
   const nextPage = () => {
     setPage(page + 1);
-    window.scrollTo({top: 0, behavior: 'smooth'})
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const prevPage = () => {
-    setPage(page - 1);
-    window.scrollTo({top: 0, behavior: 'smooth'})
+    if (page !== 1) {
+      setPage(page - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
+
+  const addToWatchlist = (anime) => {
+    setWatchlist([...watchlist, anime]);
+    
+  } 
 
   const navigate = useNavigate();
 
@@ -74,7 +79,7 @@ function HomeScreen() {
               {titleString(anime)}
               <button
                 className=""
-                onClick={() => setWatchlist([...watchlist, anime])}
+                onClick={() => addToWatchlist(anime)}
               >
                 Add to Watchlist
               </button>
@@ -83,8 +88,12 @@ function HomeScreen() {
         })}
       </main>
       <div className="flex justify-center mt-4 mb-4">
-        <button className="sign-up" onclisck={page !== 1 && prevPage}>Previous</button>
-        <button className="sign-up" onClick={nextPage}>Next</button>
+        <button className="sign-up" onClick={prevPage}>
+          Previous
+        </button>
+        <button className="sign-up" onClick={nextPage}>
+          Next
+        </button>
       </div>
     </div>
   );
