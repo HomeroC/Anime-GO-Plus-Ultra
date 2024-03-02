@@ -14,8 +14,9 @@ const createToken = (info) => {
 export const checkToken = async (req, res) => {
   try {
     const validToken = jwt.verify(req.params.token, SECRET_KEY);
+    console.log('validToken',validToken)
     if (validToken) {
-      res.status(200).send("Valid token");
+      res.status(200).send(validToken);
     } 
   } catch (error) {
     console.log(error);
@@ -31,7 +32,7 @@ export const signup = async (req, res) => {
     });
 
     if (checkUser) {
-      console.log(checkUser);
+      
       res.status(400).send("User already exists");
       
     } else {
@@ -60,10 +61,9 @@ export const login = async (req, res) => {
       if (validUser.password != req.body.password) {
         res.status(400).send("Invalid password");
       } else {
-        const token = createToken(req.body);
-        validUser.token = token
-        //   console.log(token)
-        res.status(200).send(validUser);
+        const token = createToken({id: validUser.id, username: validUser.username});
+        
+        res.status(200).send({ token, username:validUser.username, userId: validUser.id});
       }
     }
   } catch (error) {

@@ -31,9 +31,10 @@ function Auth() {
       axios
         .post("/login", body)
         .then((res) => {
-          
+          console.log(res.data)
          localStorage.setItem("token", res.data.token);
           dispatch({ type: "LOGIN", payload: res.data });
+          window.location.href = "/home";
         })
         .catch((err) => {
           console.log(err);
@@ -63,7 +64,7 @@ function Auth() {
           Password
         </label>
         <input
-          type="text"
+          type="password"
           name="password"
           placeholder="Password"
           className="px-4 py-2 mb-4 border rounded-md"

@@ -3,7 +3,7 @@ import { createContext, useReducer } from 'react'
 
 const initialState = {
     username: null,
-    password: null,
+    userId: null,
 }
 
 const AuthContext = createContext()
@@ -15,7 +15,7 @@ export const AuthContextProvider = (props) => {
                 return {
                     ...state,
                     username: action.payload.username,
-                    password: action.payload.password,
+                    userId: action.payload.id,
                 }
             case "LOGOUT":
                 return initialState

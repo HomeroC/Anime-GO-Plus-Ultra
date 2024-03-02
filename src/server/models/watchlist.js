@@ -16,4 +16,8 @@ export const Watchlist = db.define("watchlist", {
     allowNull: false,
     type: DataTypes.INTEGER,
   },
+  userId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+  }
 });

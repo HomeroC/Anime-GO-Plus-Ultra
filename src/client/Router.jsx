@@ -18,11 +18,11 @@ function Router() {
     {
       
       path: "login",
-      element: !state.password ? <Auth /> : <Navigate to="/home" />,
+      element:  <Auth />  ,
     },
     {
       path: "/",
-      element:state.password? <App /> : <Navigate to="/login" />,
+      element: <App />  ,
       children: [
         {
           index: true,

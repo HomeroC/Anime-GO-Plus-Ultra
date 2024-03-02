@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import AuthContext from "../state/AuthContext";
 
 function HomeScreen() {
   const [display, setDisplay] = useState([]);
   const [page, setPage] = useState(1);
-  const { search, watchlist, setWatchlist } = useOutletContext();
+  const { search } = useOutletContext();
+  const { state } = useContext(AuthContext);
 
   const getAnime = async () => {
     try {
@@ -48,10 +50,16 @@ function HomeScreen() {
     }
   };
 
-  const addToWatchlist = (anime) => {
-    setWatchlist([...watchlist, anime]);
+  const addToWatchlist = async (anime) => {
     
-  } 
+    try {
+      await axios.post(`/addAnime`, { anime, userId:state.userId });
+      
+    } catch (error) {
+      console.error("Error adding to watchlist:");
+     console.log(error);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -77,10 +85,7 @@ function HomeScreen() {
                 alt={anime.title}
               />
               {titleString(anime)}
-              <button
-                className=""
-                onClick={() => addToWatchlist(anime)}
-              >
+              <button className="" onClick={() => addToWatchlist(anime)}>
                 Add to Watchlist
               </button>
             </div>
