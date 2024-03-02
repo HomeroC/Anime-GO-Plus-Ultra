@@ -17,7 +17,7 @@ function App() {
       .then((res) => {
         if (window.location.pathname === "/login") {
           window.location.href = "/home";
-        } 
+        } console.log(res.data)
         dispatch({ type: "LOGIN", payload: res.data });
       })
       .catch(() => {

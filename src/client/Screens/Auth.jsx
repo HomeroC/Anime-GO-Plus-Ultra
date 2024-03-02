@@ -7,7 +7,6 @@ function Auth() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [action, setAction] = useState("");
-  // const [token, setToken] = useState("");
   const {dispatch} = useContext(AuthContext);
 
   const handleSubmit = (e) => {

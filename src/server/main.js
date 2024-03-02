@@ -1,6 +1,6 @@
 import express from "express";
 import ViteExpress from "vite-express";
-import { getAllAnime, getDetails, addAnime} from "./controllers/anime.js";
+import { getAllAnime, getDetails, addAnime, getWatchlist} from "./controllers/anime.js";
 import {db} from "./util/db.js"
 import { User } from "./models/user.js";
 import { Watchlist } from "./models/watchlist.js";
@@ -16,6 +16,7 @@ app.post("/addAnime", addAnime)
 app.post("/login", login)
 app.post("/signup", signup)
 app.get("/checkToken/:token", checkToken)
+app.get('/watchlist/:userId', getWatchlist)
 
 User.hasMany(Watchlist);
 Watchlist.belongsTo(User)

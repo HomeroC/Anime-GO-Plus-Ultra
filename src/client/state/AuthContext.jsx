@@ -12,6 +12,7 @@ export const AuthContextProvider = (props) => {
     const [state, dispatch] = useReducer((state, action) => {
         switch (action.type) {
             case "LOGIN":
+               
                 return {
                     ...state,
                     username: action.payload.username,
