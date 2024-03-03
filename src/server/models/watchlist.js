@@ -19,5 +19,9 @@ export const Watchlist = db.define("watchlist", {
   userId: {
     allowNull: false,
     type: DataTypes.INTEGER,
+  },
+  animeImage: {
+    allowNull: false,
+    type: DataTypes.STRING,
   }
 });

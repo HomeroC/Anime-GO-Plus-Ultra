@@ -14,7 +14,7 @@ import AuthContext from "./state/AuthContext";
 
 function Router() {
   const { state } = useContext(AuthContext);
-  console.log(state)
+  // console.log(state)
   const router = createBrowserRouter([
     {
       
