@@ -47,8 +47,8 @@ function Watchlist() {
   };
 
   return (
-    <div className=" p-4 bg-[#23252B] h-full pt-20">
-      <h1 className="text-white flex justify-center">Your Watchlist</h1>
+    <div className=" p-4 bg-[#23252B] h-screen pt-20">
+      <h1 className="text-white flex justify-center pt-10">Your Watchlist</h1>
       <main className="flex flex-row flex-wrap gap-5 justify-center pt-14 p-2">
         {watchlist.map((anime) => {
           return (
@@ -63,7 +63,7 @@ function Watchlist() {
               />
               {titleString(anime)}
               <button
-                className=""
+                className="remove"
                 onClick={() => {
                   deleteAnime(anime);
                 }}
